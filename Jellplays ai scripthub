@@ -1,0 +1,66 @@
+-- Example Lua GUI with buttons and a toggle to show/hide the GUI
+
+local gui = Instance.new("ScreenGui")
+gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 300, 0, 150)
+frame.Position = UDim2.new(0.5, -150, 0.5, -75)
+frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+frame.Parent = gui
+
+local title = Instance.new("TextLabel")
+title.Text = "JellPlays ScripHub"
+title.Size = UDim2.new(1, 0, 0, 20)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundColor3 = Color3.new(0, 0, 0)
+title.TextColor3 = Color3.new(1, 1, 1)
+title.Parent = frame
+
+local mm2Button = Instance.new("TextButton")
+mm2Button.Text = "Mm2 script"
+mm2Button.Size = UDim2.new(0, 150, 0, 50)
+mm2Button.Position = UDim2.new(0.5, -75, 0.5, -25)
+mm2Button.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+mm2Button.Parent = frame
+
+mm2Button.MouseButton1Click:Connect(function()
+    local mm2LoadstringUrl = 'https://raw.githubusercontent.com/R3TH-PRIV/R3THPRIV/main/loader.lua'
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(mm2LoadstringUrl))()
+    end)
+    if not success then
+        warn("Failed to execute Mm2 loadstring:", result)
+    end
+end)
+
+local aimlockButton = Instance.new("TextButton")
+aimlockButton.Text = "Aimlock script"
+aimlockButton.Size = UDim2.new(0, 150, 0, 50)
+aimlockButton.Position = UDim2.new(0.5, -75, 0.5, 25)
+aimlockButton.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+aimlockButton.Parent = frame
+
+aimlockButton.MouseButton1Click:Connect(function()
+    local aimlockLoadstringUrl = 'https://raw.githubusercontent.com/Jelly-plays/Dahood-aimlock-not-mine/main/Aimlock%20main%20loader'
+    local success, result = pcall(function()
+        return loadstring(game:HttpGet(aimlockLoadstringUrl))()
+    end)
+    if not success then
+        warn("Failed to execute Aimlock loadstring:", result)
+    end
+end)
+
+local toggleButton = Instance.new("TextButton")
+toggleButton.Text = "Toggle GUI"
+toggleButton.Size = UDim2.new(0, 150, 0, 50)
+toggleButton.Position = UDim2.new(0.5, -75, 0.5, 75)
+toggleButton.BackgroundColor3 = Color3.new(0.4, 0.4, 0.4)
+toggleButton.Parent = frame
+
+local guiVisible = true
+
+toggleButton.MouseButton1Click:Connect(function()
+    guiVisible = not guiVisible
+    gui.Enabled = guiVisible
+end)
